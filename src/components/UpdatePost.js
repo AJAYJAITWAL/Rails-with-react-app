@@ -1,15 +1,12 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState,setState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
 
 function UpdatePost() {
   const [data, setData] = useState({});
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
-  const navigate = useNavigate();
   const { id } = useParams();
   
   const getData =  () => {
@@ -21,26 +18,28 @@ function UpdatePost() {
     })
     .catch((error) => console.log(error));
   }
+
+  const handleUpdateSubmit= (e) => {
+    axios
+    .put(`/posts/${data.id}`, {post: {title: title, description: description}})
+    .then((res) => {
+      // navigate('/');
+      alert("Post successfully updated!");
+      console.log(res.data)
+      })
+      .catch((error) => console.log(error));
+      e.preventDefault();
+  }
   
-    useEffect(()=>{
-      getData();  
-    },[] )
-  
-    const handleUpdateSubmit= (e) => {
-      axios
-      .put(`/posts/${data.id}`, {post: {title: title, description: description}})
-      .then((res) => {
-        // navigate('/');
-        alert("Post successfully updated!");
-        console.log(res.data)
-        })
-        .catch((error) => console.log(error));
-        e.preventDefault();
-      }
-      return (
-        <>
+  useEffect(()=>{
+    getData();  
+  })
+
+  return (
+    <>
       <div className='container my-3'>
         <h1>Edit a post</h1>
+
         <form onSubmit={e => { handleUpdateSubmit(e) }}>
           <div className="mb-3">
             <label className="form-label">Title</label>

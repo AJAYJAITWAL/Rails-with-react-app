@@ -1,28 +1,31 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState,setState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import axios from 'axios';
 
 function CreatePost() {
-    const [title, setTitle] = useState();
-    const [description, setDescription] = useState();
-    const navigate = useNavigate();
-    const handleSubmit= (e) => {
-      axios
-      .post(`/posts`, {post: {title: title, description: description}})
-      .then((res) => {
-        navigate('/');
-        alert("Post successfully created!");
-        console.log(res.data)
-        })
-        .catch((error) => console.log(error));
-        e.preventDefault();
-      }
-      
-      return (
-        <>
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
+
+  const navigate = useNavigate();
+
+  const handleSubmit= (e) => {
+    axios
+    .post(`/posts`, {post: {title: title, description: description}})
+    .then((res) => {
+      navigate('/');
+      alert("Post successfully created!");
+      console.log(res.data)
+      })
+      .catch((error) => console.log(error));
+      e.preventDefault();
+  }
+    
+  return (
+    <>
       <div className='container my-3'>
         <h1>Add a post</h1>
+
         <form onSubmit={e => { handleSubmit(e) }}>
           <div className="mb-3">
             <label className="form-label">Title</label>

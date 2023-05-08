@@ -1,11 +1,9 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom"
 import Index from "./components/Index";
 import CreatePost from "./components/CreatePost";
 import PostDetails from "./components/PostDetails";
 import UpdatePost from "./components/UpdatePost";
-import { Link } from "react-router-dom";
 import Navbar from './components/Navbar';
 import About from './components/About';
 import Contact from './components/Contact';
