@@ -24,7 +24,6 @@ const Index = () => {
     .delete(`/posts/${id}`)
     .then((res) => {
       console.log("deleted");
-      alert("Post Successfully deleted!");  
     })
   }
 

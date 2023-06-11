@@ -1,13 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function UpdatePost() {
   const [data, setData] = useState({});
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const { id } = useParams();
+  const navigate = useNavigate();
   
   const getData =  () => {
     axios
@@ -23,8 +24,8 @@ function UpdatePost() {
     axios
     .put(`/posts/${data.id}`, {post: {title: title, description: description}})
     .then((res) => {
-      // navigate('/');
       alert("Post successfully updated!");
+      navigate('/');
       console.log(res.data)
       })
       .catch((error) => console.log(error));
@@ -33,7 +34,7 @@ function UpdatePost() {
   
   useEffect(()=>{
     getData();  
-  })
+  }, [])
 
   return (
     <>
